@@ -4,19 +4,16 @@ import org.cloudsimplus.brokers.DatacenterBrokerSimple;
 import org.cloudsimplus.cloudlets.Cloudlet;
 import org.cloudsimplus.cloudlets.CloudletSimple;
 import org.cloudsimplus.core.CloudSimPlus;
-import org.cloudsimplus.listeners.EventListener;
 import org.cloudsimplus.datacenters.DatacenterSimple;
-import org.cloudsimplus.datacenters.Datacenter;
 import org.cloudsimplus.hosts.Host;
 import org.cloudsimplus.hosts.HostSimple;
 import org.cloudsimplus.resources.PeSimple;
 import org.cloudsimplus.vms.Vm;
 import org.cloudsimplus.vms.VmSimple;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class CloudSimPlusExample7 {
+public class CloudSimPlusExample8 {
     public static void main(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
 
@@ -32,14 +29,16 @@ public class CloudSimPlusExample7 {
 
         distributeCloudletsToBrokers(brokers, cloudlets);
 
-        // Add an event listener to pause and resume the simulation
+        // Add an event listener to dynamically add entities at runtime
         simulation.addOnEventProcessingListener(e -> {
             if (e.getTime() == 50.0) {
-                System.out.println("Pausing the simulation at time 50.0");
-                simulation.pause();
-            } else if (e.getTime() == 100.0) {
-                System.out.println("Resuming the simulation at time 100.0");
-                simulation.resume();
+                System.out.println("Adding a new Datacenter and Broker at time 50.0");
+                DatacenterSimple newDatacenter = createDatacenter("DatacenterNew", simulation);
+                DatacenterBrokerSimple newBroker = new DatacenterBrokerSimple(simulation);
+                List<Vm> newVms = createVMs(2);
+                newBroker.submitVmList(newVms);
+                brokers.add(newBroker);
+                datacenters.add(newDatacenter);
             }
         });
 
