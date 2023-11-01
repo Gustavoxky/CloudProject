@@ -29,7 +29,6 @@ public class CloudSimPlusExample8 {
 
         distributeCloudletsToBrokers(brokers, cloudlets);
 
-        // Add an event listener to dynamically add entities at runtime
         simulation.addOnEventProcessingListener(e -> {
             if (e.getTime() == 50.0) {
                 System.out.println("Adding a new Datacenter and Broker at time 50.0");
@@ -42,7 +41,6 @@ public class CloudSimPlusExample8 {
             }
         });
 
-        // Início da simulação
         simulation.start();
 
         for (int i = 0; i < brokers.size(); i++) {

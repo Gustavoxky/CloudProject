@@ -17,15 +17,12 @@ public class CloudSimPlusExample5 {
     public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
 
-        // Criação dos Datacenters
         DatacenterSimple datacenter1 = createDatacenter("Datacenter1", simulation);
         DatacenterSimple datacenter2 = createDatacenter("Datacenter2", simulation);
 
-        // Criação do Broker
         DatacenterBrokerSimple broker1 = new DatacenterBrokerSimple(simulation);
         DatacenterBrokerSimple broker2 = new DatacenterBrokerSimple(simulation);
 
-        // Criação das VMs
         VmSimple vm1 = new VmSimple(1000, 1);
         VmSimple vm2 = new VmSimple(1500, 1);
 
@@ -37,27 +34,22 @@ public class CloudSimPlusExample5 {
         broker1.submitVmList(vmList1, 0);
         broker2.submitVmList(vmList2, 0);
 
-        // Criação das Cloudlets
         CloudletSimple cloudlet1 = new CloudletSimple(4000, 1);
         CloudletSimple cloudlet2 = new CloudletSimple(6000, 1);
         CloudletSimple cloudlet3 = new CloudletSimple(3000, 1);
         CloudletSimple cloudlet4 = new CloudletSimple(5000, 1);
 
-        // Submissão das Cloudlets aos Brokers
         broker1.submitCloudlet(cloudlet1);
         broker1.submitCloudlet(cloudlet2);
         broker2.submitCloudlet(cloudlet3);
         broker2.submitCloudlet(cloudlet4);
 
-        // Início da simulação
         simulation.start();
 
-        // Resultados do Broker 1
         System.out.println("Resultados do Broker 1:");
         List<Cloudlet> finishedCloudlets1 = broker1.getCloudletFinishedList();
         printCloudletList(finishedCloudlets1);
 
-        // Resultados do Broker 2
         System.out.println("\nResultados do Broker 2:");
         List<Cloudlet> finishedCloudlets2 = broker2.getCloudletFinishedList();
         printCloudletList(finishedCloudlets2);

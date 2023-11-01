@@ -30,7 +30,6 @@ public class CloudSimPlusExample7 {
 
         distributeCloudletsToBrokers(brokers, cloudlets);
 
-        // Add an event listener to pause and resume the simulation
         simulation.addOnEventProcessingListener(e -> {
             if (e.getTime() == 50.0) {
                 System.out.println("Pausing the simulation at time 50.0");
@@ -41,7 +40,6 @@ public class CloudSimPlusExample7 {
             }
         });
 
-        // Início da simulação
         simulation.start();
 
         for (int i = 0; i < brokers.size(); i++) {

@@ -18,7 +18,6 @@ public class MultipleHostsAndVMsExample {
         CloudSimPlus simulation = new CloudSimPlus();
         DatacenterBrokerSimple broker = new DatacenterBrokerSimple(simulation);
 
-        // Create and add multiple hosts to a datacenter
         List<HostSimple> hosts = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             HostSimple host = new HostSimple(10000, 100000, 100000, List.of(new PeSimple(2000)));
@@ -27,7 +26,6 @@ public class MultipleHostsAndVMsExample {
 
         DatacenterSimple datacenter = new DatacenterSimple(simulation, hosts);
 
-        // Create and add multiple VMs to the broker
         List<VmSimple> vms = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             VmSimple vm = new VmSimple(1000, 1);
@@ -37,7 +35,6 @@ public class MultipleHostsAndVMsExample {
 
         broker.submitVmList(vms);
 
-        // Create and add multiple Cloudlets to the broker
         List<CloudletSimple> cloudlets = new ArrayList<>();
         var utilizationModel = new UtilizationModelDynamic(0.5);
         for (int i = 0; i < 5; i++) {
