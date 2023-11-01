@@ -1,4 +1,4 @@
-package com.networks.CloudProject1;
+package com.networks;
 
 import org.cloudsimplus.brokers.DatacenterBrokerSimple;
 import org.cloudsimplus.builders.tables.CloudletsTableBuilder;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleHostsAndVMsExample {
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
         DatacenterBrokerSimple broker = new DatacenterBrokerSimple(simulation);
 

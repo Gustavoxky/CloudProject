@@ -15,6 +15,8 @@ public class CloudProjectApplication {
 		CloudSimPlusExample6.run(args);
 		CloudSimPlusExample7.run(args);
 		CloudSimPlusExample8.run(args);
+//		MultipleHostsAndVMsExample.run(args);
+		NetworkSimulationExample.run(args);
 
 	}
 }

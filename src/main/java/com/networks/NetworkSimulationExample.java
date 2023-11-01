@@ -1,4 +1,4 @@
-package com.networks.CloudProject2;
+package com.networks;
 
 import org.cloudsimplus.brokers.DatacenterBrokerSimple;
 import org.cloudsimplus.builders.tables.CloudletsTableBuilder;
@@ -12,7 +12,7 @@ import org.cloudsimplus.vms.VmSimple;
 import java.util.List;
 
 public class NetworkSimulationExample {
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
         DatacenterBrokerSimple broker = new DatacenterBrokerSimple(simulation);
 
@@ -25,9 +25,6 @@ public class NetworkSimulationExample {
         VmSimple vm2 = new VmSimple(800, 1);
 
         broker.submitVmList(List.of(vm1, vm2));
-
-        // Define a network topology and connect VMs to the network
-//        datacenter.getPowerModel().addLink(host1, host2, 10.0, 10000); // 10 Mbps, 10ms delay
 
         broker.submitCloudletList(List.of(new CloudletSimple(10000, 1), new CloudletSimple(8000, 1)));
 
