@@ -1,4 +1,4 @@
-package com.networks.CloudProject;
+package com.networks.CloudExamples;
 
 import org.cloudsimplus.brokers.DatacenterBrokerSimple;
 import org.cloudsimplus.cloudlets.CloudletSimple;
@@ -10,7 +10,7 @@ import org.cloudsimplus.vms.VmSimple;
 
 import java.util.List;
 
-public class CloudSimPlusExample1 {
+public class CloudSimPlusExample2 {
     public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
 
@@ -20,12 +20,14 @@ public class CloudSimPlusExample1 {
         DatacenterSimple datacenter = new DatacenterSimple(simulation, List.of(host));
 
         VmSimple vm = new VmSimple(1000, 1);
-        broker.submitVmList(List.of(vm));
+        broker.submitVm(vm);
 
-        CloudletSimple cloudlet = new CloudletSimple(10000, 1);
-        broker.submitCloudletList(List.of(cloudlet));
+        CloudletSimple cloudlet1 = new CloudletSimple(10000, 1);
+        CloudletSimple cloudlet2 = new CloudletSimple(10000, 1);
+
+        broker.submitCloudlet(cloudlet1);
+        broker.submitCloudlet(cloudlet2);
 
         simulation.start();
     }
 }
-

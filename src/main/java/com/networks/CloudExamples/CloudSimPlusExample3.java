@@ -1,4 +1,4 @@
-package com.networks.CloudProject;
+package com.networks.CloudExamples;
 
 import org.cloudsimplus.brokers.DatacenterBrokerSimple;
 import org.cloudsimplus.cloudlets.CloudletSimple;

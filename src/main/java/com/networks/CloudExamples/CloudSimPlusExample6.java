@@ -1,4 +1,4 @@
-package com.networks.CloudProject;
+package com.networks.CloudExamples;
 
 import org.cloudsimplus.brokers.DatacenterBrokerSimple;
 import org.cloudsimplus.cloudlets.Cloudlet;
@@ -10,41 +10,36 @@ import org.cloudsimplus.hosts.HostSimple;
 import org.cloudsimplus.resources.PeSimple;
 import org.cloudsimplus.vms.Vm;
 import org.cloudsimplus.vms.VmSimple;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CloudSimPlusExample8 {
+public class CloudSimPlusExample6 {
     public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
 
+        // Criação de vários Datacenters
         List<DatacenterSimple> datacenters = createMultipleDatacenters(simulation, 3);
+
+        // Criação de múltiplos Brokers
         List<DatacenterBrokerSimple> brokers = createMultipleBrokers(simulation, 3);
 
+        // Criação de VMs para cada Broker
         for (DatacenterBrokerSimple broker : brokers) {
-            List<Vm> vms = createVMs(2);
+            List<Vm> vms = createVMs(2); // Crie 2 VMs para cada Broker
             broker.submitVmList(vms);
         }
 
-        List<Cloudlet> cloudlets = createCloudlets(12);
+        // Criação de Cloudlets
+        List<Cloudlet> cloudlets = createCloudlets(12); // Crie 12 Cloudlets no total
 
+        // Distribua os Cloudlets entre os Brokers
         distributeCloudletsToBrokers(brokers, cloudlets);
-
-        // Add an event listener to dynamically add entities at runtime
-        simulation.addOnEventProcessingListener(e -> {
-            if (e.getTime() == 50.0) {
-                System.out.println("Adding a new Datacenter and Broker at time 50.0");
-                DatacenterSimple newDatacenter = createDatacenter("DatacenterNew", simulation);
-                DatacenterBrokerSimple newBroker = new DatacenterBrokerSimple(simulation);
-                List<Vm> newVms = createVMs(2);
-                newBroker.submitVmList(newVms);
-                brokers.add(newBroker);
-                datacenters.add(newDatacenter);
-            }
-        });
 
         // Início da simulação
         simulation.start();
 
+        // Exibição dos resultados de cada Broker
         for (int i = 0; i < brokers.size(); i++) {
             DatacenterBrokerSimple broker = brokers.get(i);
             System.out.println("Resultados do Broker " + i + ":");

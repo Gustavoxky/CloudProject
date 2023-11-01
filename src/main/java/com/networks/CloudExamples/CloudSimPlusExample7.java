@@ -1,4 +1,4 @@
-package com.networks.CloudProject;
+package com.networks.CloudExamples;
 
 import org.cloudsimplus.brokers.DatacenterBrokerSimple;
 import org.cloudsimplus.cloudlets.Cloudlet;
@@ -14,32 +14,36 @@ import org.cloudsimplus.vms.VmSimple;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CloudSimPlusExample6 {
+public class CloudSimPlusExample7 {
     public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
 
-        // Criação de vários Datacenters
         List<DatacenterSimple> datacenters = createMultipleDatacenters(simulation, 3);
-
-        // Criação de múltiplos Brokers
         List<DatacenterBrokerSimple> brokers = createMultipleBrokers(simulation, 3);
 
-        // Criação de VMs para cada Broker
         for (DatacenterBrokerSimple broker : brokers) {
-            List<Vm> vms = createVMs(2); // Crie 2 VMs para cada Broker
+            List<Vm> vms = createVMs(2);
             broker.submitVmList(vms);
         }
 
-        // Criação de Cloudlets
-        List<Cloudlet> cloudlets = createCloudlets(12); // Crie 12 Cloudlets no total
+        List<Cloudlet> cloudlets = createCloudlets(12);
 
-        // Distribua os Cloudlets entre os Brokers
         distributeCloudletsToBrokers(brokers, cloudlets);
+
+        // Add an event listener to pause and resume the simulation
+        simulation.addOnEventProcessingListener(e -> {
+            if (e.getTime() == 50.0) {
+                System.out.println("Pausing the simulation at time 50.0");
+                simulation.pause();
+            } else if (e.getTime() == 100.0) {
+                System.out.println("Resuming the simulation at time 100.0");
+                simulation.resume();
+            }
+        });
 
         // Início da simulação
         simulation.start();
 
-        // Exibição dos resultados de cada Broker
         for (int i = 0; i < brokers.size(); i++) {
             DatacenterBrokerSimple broker = brokers.get(i);
             System.out.println("Resultados do Broker " + i + ":");
