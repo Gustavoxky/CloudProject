@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CloudSimPlusExample7 {
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
 
         List<DatacenterSimple> datacenters = createMultipleDatacenters(simulation, 3);

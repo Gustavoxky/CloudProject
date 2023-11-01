@@ -11,7 +11,7 @@ import org.cloudsimplus.vms.VmSimple;
 import java.util.List;
 
 public class CloudSimPlusExample1 {
-    public static void main(String[] args) {
+    public static void run(String[] args) {
         CloudSimPlus simulation = new CloudSimPlus();
 
         DatacenterBrokerSimple broker = new DatacenterBrokerSimple(simulation);
